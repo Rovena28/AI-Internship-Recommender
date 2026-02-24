@@ -1,0 +1,142 @@
+[
+  {
+    "title": "Data Science Intern",
+    "description": "Assist in building machine learning models for predictive analytics. Perform data cleaning, exploratory data analysis, and feature engineering using Python. Work with pandas, NumPy, scikit-learn, and SQL databases. Collaborate with the analytics team to generate business insights.",
+    "location": "Remote",
+    "duration": "3 months",
+    "target_candidates": "3rd year and above, CSE/IT or Data-related branches"
+  },
+  {
+    "title": "Machine Learning Intern",
+    "description": "Develop and train supervised and unsupervised machine learning models. Work on classification and regression problems using TensorFlow or PyTorch. Participate in model evaluation, hyperparameter tuning, and deployment workflows.",
+    "location": "Bangalore",
+    "duration": "6 months",
+    "target_candidates": "Students with strong Python and ML fundamentals"
+  },
+  {
+    "title": "AI Research Intern",
+    "description": "Work on deep learning research projects including computer vision and NLP tasks. Implement CNNs, RNNs, or transformer-based architectures. Analyze research papers and reproduce experiments.",
+    "location": "Remote",
+    "duration": "4 months",
+    "target_candidates": "Students interested in AI research and advanced ML"
+  },
+  {
+    "title": "Frontend Developer Intern",
+    "description": "Design and develop responsive user interfaces using HTML, CSS, JavaScript, and React. Improve website usability and performance. Integrate frontend with backend APIs.",
+    "location": "Chennai",
+    "duration": "6 months",
+    "target_candidates": "Students passionate about web development"
+  },
+  {
+    "title": "Backend Developer Intern",
+    "description": "Develop server-side applications using Python and Flask. Build REST APIs and manage database operations. Work on authentication, routing, and backend architecture.",
+    "location": "Bangalore",
+    "duration": "4 months",
+    "target_candidates": "CSE/IT students interested in backend systems"
+  },
+  {
+    "title": "Full Stack Developer Intern",
+    "description": "Work on full-stack web applications using React for frontend and Node.js or Flask for backend. Design APIs, manage databases, and deploy applications on cloud platforms.",
+    "location": "Hybrid - Chennai",
+    "duration": "6 months",
+    "target_candidates": "Students with knowledge of frontend and backend development"
+  },
+  {
+    "title": "Mobile App Developer Intern",
+    "description": "Develop Android applications using Kotlin or Java. Integrate Firebase and REST APIs. Test and debug mobile applications to improve performance and user experience.",
+    "location": "Remote",
+    "duration": "3 months",
+    "target_candidates": "Students interested in mobile application development"
+  },
+  {
+    "title": "DevOps Intern",
+    "description": "Assist in CI/CD pipeline setup using GitHub Actions or Jenkins. Work with Docker containers and manage deployments on cloud platforms like AWS. Monitor system performance and logs.",
+    "location": "Bangalore",
+    "duration": "5 months",
+    "target_candidates": "Students with Linux and cloud basics"
+  },
+  {
+    "title": "Cybersecurity Intern",
+    "description": "Conduct vulnerability assessments and penetration testing. Analyze network traffic and security logs. Assist in implementing security policies and encryption mechanisms.",
+    "location": "Chennai",
+    "duration": "4 months",
+    "target_candidates": "Students interested in cybersecurity and ethical hacking"
+  },
+  {
+    "title": "Cloud Computing Intern",
+    "description": "Work with AWS services such as EC2, S3, and Lambda. Deploy applications on cloud infrastructure and monitor usage metrics. Assist in optimizing cloud resource allocation.",
+    "location": "Remote",
+    "duration": "3 months",
+    "target_candidates": "Students familiar with cloud fundamentals"
+  },
+  {
+    "title": "Data Analyst Intern",
+    "description": "Perform data cleaning and visualization using Python and Power BI. Create dashboards and generate reports. Use SQL queries to extract and analyze business data.",
+    "location": "Chennai",
+    "duration": "3 months",
+    "target_candidates": "Students interested in analytics and reporting"
+  },
+  {
+    "title": "Business Intelligence Intern",
+    "description": "Develop interactive dashboards using Tableau or Power BI. Analyze business metrics and support data-driven decision-making. Work closely with cross-functional teams.",
+    "location": "Bangalore",
+    "duration": "4 months",
+    "target_candidates": "Students with analytical and visualization skills"
+  },
+  {
+    "title": "Blockchain Intern",
+    "description": "Develop smart contracts using Solidity. Understand Ethereum blockchain architecture and decentralized applications. Assist in testing and deploying blockchain solutions.",
+    "location": "Remote",
+    "duration": "4 months",
+    "target_candidates": "Students interested in blockchain technology"
+  },
+  {
+    "title": "IoT Intern",
+    "description": "Develop IoT prototypes using Arduino or Raspberry Pi. Collect and analyze sensor data. Work on integrating IoT devices with cloud platforms.",
+    "location": "Chennai",
+    "duration": "3 months",
+    "target_candidates": "Students with embedded systems interest"
+  },
+  {
+    "title": "UI/UX Design Intern",
+    "description": "Design user interfaces using Figma or Adobe XD. Conduct user research and usability testing. Collaborate with frontend developers to improve user experience.",
+    "location": "Remote",
+    "duration": "3 months",
+    "target_candidates": "Students interested in design and user experience"
+  },
+  {
+    "title": "Software Testing Intern",
+    "description": "Perform manual and automated testing of web applications. Write test cases and identify bugs. Work with Selenium or other automation tools.",
+    "location": "Bangalore",
+    "duration": "4 months",
+    "target_candidates": "Students interested in QA and testing"
+  },
+  {
+    "title": "Embedded Systems Intern",
+    "description": "Develop firmware for microcontrollers using C/C++. Work on hardware-software integration. Debug and test embedded applications.",
+    "location": "Chennai",
+    "duration": "4 months",
+    "target_candidates": "ECE or embedded-focused students"
+  },
+  {
+    "title": "Game Development Intern",
+    "description": "Develop 2D/3D games using Unity or Unreal Engine. Implement gameplay mechanics and debug performance issues. Work with C# or C++.",
+    "location": "Remote",
+    "duration": "3 months",
+    "target_candidates": "Students interested in game development"
+  },
+  {
+    "title": "NLP Intern",
+    "description": "Build natural language processing models using transformers. Perform text preprocessing, sentiment analysis, and chatbot development. Use Python and HuggingFace libraries.",
+    "location": "Remote",
+    "duration": "4 months",
+    "target_candidates": "Students interested in language AI systems"
+  },
+  {
+    "title": "Product Management Intern",
+    "description": "Assist in defining product requirements and writing PRDs. Conduct market research and competitor analysis. Work with engineering and design teams.",
+    "location": "Hybrid - Bangalore",
+    "duration": "5 months",
+    "target_candidates": "Students interested in product strategy and management"
+  }
+]

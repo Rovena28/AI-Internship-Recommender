@@ -1,0 +1,50 @@
+[
+  {
+    "resume_text": "Built machine learning models using Python and scikit-learn. Performed data cleaning, exploratory data analysis, and SQL queries for analytics projects.",
+    "expected_title": "Data Science Intern"
+  },
+  {
+    "resume_text": "Developed predictive models and worked with pandas, NumPy, and SQL databases. Strong interest in AI and data-driven problem solving.",
+    "expected_title": "Data Science Intern"
+  },
+  {
+    "resume_text": "Created dashboards and performed statistical analysis using Python. Built regression models and handled large datasets.",
+    "expected_title": "Data Science Intern"
+  },
+  {
+    "resume_text": "Built responsive websites using HTML, CSS, and JavaScript. Worked on React projects and improved UI/UX for web applications.",
+    "expected_title": "Frontend Developer Intern"
+  },
+  {
+    "resume_text": "Developed frontend components using React and Bootstrap. Integrated REST APIs and improved website performance.",
+    "expected_title": "Frontend Developer Intern"
+  },
+  {
+    "resume_text": "Designed interactive web pages with modern CSS and JavaScript frameworks. Passionate about web design and user experience.",
+    "expected_title": "Frontend Developer Intern"
+  },
+  {
+    "resume_text": "Developed REST APIs using Python and Flask. Managed relational databases and implemented authentication systems.",
+    "expected_title": "Backend Developer Intern"
+  },
+  {
+    "resume_text": "Worked on backend systems with Python. Designed database schemas and handled API integrations.",
+    "expected_title": "Backend Developer Intern"
+  },
+  {
+    "resume_text": "Built server-side applications using Flask and managed SQL databases. Implemented CRUD operations and authentication modules.",
+    "expected_title": "Backend Developer Intern"
+  },
+  {
+    "resume_text": "Experienced in Python programming, machine learning, and backend API development. Worked with Flask and built predictive analytics tools.",
+    "expected_title": "Data Science Intern"
+  },
+  {
+    "resume_text": "Developed full-stack applications using HTML, CSS, JavaScript, and Python Flask. Strong backend and frontend knowledge.",
+    "expected_title": "Backend Developer Intern"
+  },
+  {
+    "resume_text": "Implemented data analysis pipelines and built dashboards using Python. Comfortable with SQL and statistical modeling.",
+    "expected_title": "Data Science Intern"
+  }
+]

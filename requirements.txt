@@ -1,0 +1,8 @@
+flask
+pdfplumber
+sentence-transformers
+torch
+scikit-learn
+google-genai
+python-dotenv
+numpy
