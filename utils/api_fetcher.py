@@ -13,32 +13,8 @@ APP_KEY = os.getenv("ADZUNA_APP_KEY")
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_FILE = os.path.join(BASE_DIR, "api_internships.json")
 
-CACHE_DURATION = 3600          # 1 hour cache
-MAX_JOB_AGE_DAYS = 14          # Only internships from last 14 days
-
-
-# Strong tech keywords (positive filter)
-TECH_KEYWORDS = [
-    "software", "developer", "engineer",
-    "programmer", "python", "java", "c++",
-    "react", "node", "web", "application",
-    "machine learning", "ai", "data",
-    "backend", "frontend", "full stack",
-    "cloud", "aws", "azure", "cyber",
-    "devops", "database", "testing",
-    "qa", "automation", "iot",
-    "embedded", "android", "ios",
-    "ui", "ux"
-]
-
-# Explicit non-tech rejection list
-NON_TECH_KEYWORDS = [
-    "finance", "accounting", "hr", "human resource",
-    "marketing", "sales", "mba", "recruitment",
-    "talent acquisition", "operations",
-    "copywriting", "content", "seo",
-    "outreach", "coordinator"
-]
+CACHE_DURATION = 3600
+MAX_JOB_AGE_DAYS = 30
 
 
 def is_cache_valid():
@@ -59,10 +35,10 @@ def is_cache_valid():
 
 def is_recent(created_date_str, days=MAX_JOB_AGE_DAYS):
     try:
-        job_date = datetime.strptime(created_date_str, "%Y-%m-%dT%H:%M:%SZ")
-        job_date = job_date.replace(tzinfo=timezone.utc)
+        internship_date = datetime.strptime(created_date_str, "%Y-%m-%dT%H:%M:%SZ")
+        internship_date = internship_date.replace(tzinfo=timezone.utc)
         now = datetime.now(timezone.utc)
-        return (now - job_date) <= timedelta(days=days)
+        return (now - internship_date) <= timedelta(days=days)
     except:
         return False
 
@@ -86,26 +62,6 @@ def is_valid_internship(title, description):
     return True
 
 
-def is_tech_internship(title, description):
-    text = (title + " " + description).lower()
-
-    # Reject non-tech first
-    i = 0
-    while i < len(NON_TECH_KEYWORDS):
-        if NON_TECH_KEYWORDS[i] in text:
-            return False
-        i += 1
-
-    # Accept only strong tech signals
-    j = 0
-    while j < len(TECH_KEYWORDS):
-        if TECH_KEYWORDS[j] in text:
-            return True
-        j += 1
-
-    return False
-
-
 def is_generic_title(title):
     title_lower = title.lower().strip()
 
@@ -114,6 +70,27 @@ def is_generic_title(title):
 
     if len(title_lower.split()) <= 1:
         return True
+
+    return False
+
+
+def is_tech_internship(title, description):
+    text = (title + " " + description).lower()
+
+    tech_keywords = [
+        "software", "developer", "data", "machine learning",
+        "ai", "cloud", "backend", "frontend",
+        "cybersecurity", "python", "java",
+        "web", "full stack", "devops",
+        "mobile", "android", "react",
+        "node", "sql", "analytics"
+    ]
+
+    i = 0
+    while i < len(tech_keywords):
+        if tech_keywords[i] in text:
+            return True
+        i += 1
 
     return False
 
@@ -132,13 +109,12 @@ def normalize_title(title):
 
 def fetch_from_api(search_query=None):
 
-    print("---- Adzuna Fetch Started ----")
+    print("---- Adzuna Internship Fetch Started ----")
 
     if not APP_ID or not APP_KEY:
         print("API keys missing in .env")
         return []
 
-    # Use cache if still valid
     if is_cache_valid():
         print("Using cached internships")
         with open(CACHE_FILE, "r", encoding="utf-8") as f:
@@ -150,24 +126,27 @@ def fetch_from_api(search_query=None):
         "app_id": APP_ID,
         "app_key": APP_KEY,
         "results_per_page": 25,
-        "what": "software intern OR developer intern OR data intern OR AI intern",
+        "what": "internship",
         "where": "India"
     }
 
     try:
         response = requests.get(url, params=params, timeout=10)
-        print("Status Code:", response.status_code)
 
         if response.status_code != 200:
-            print("API returned non-200 status")
+            print("API failed. Using fallback cache if available.")
+            if os.path.exists(CACHE_FILE):
+                with open(CACHE_FILE, "r", encoding="utf-8") as f:
+                    return json.load(f)
             return []
 
         data = response.json()
-        print("Total count from API:", data.get("count"))
-        print("Results returned:", len(data.get("results", [])))
 
-    except Exception as e:
-        print("API Request Error:", e)
+    except Exception:
+        print("Exception occurred. Using fallback cache if available.")
+        if os.path.exists(CACHE_FILE):
+            with open(CACHE_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
         return []
 
     internships = []
@@ -176,34 +155,31 @@ def fetch_from_api(search_query=None):
 
     i = 0
     while i < len(results_list):
-        job = results_list[i]
 
-        title = job.get("title", "")
-        description = job.get("description", "")
-        created = job.get("created", "")
+        internship = results_list[i]
 
-        #  Freshness filter
+        title = internship.get("title", "")
+        description = internship.get("description", "")
+        created = internship.get("created", "")
+
         if not is_recent(created):
             i += 1
             continue
 
-        #  Reject senior roles
         if not is_valid_internship(title, description):
             i += 1
             continue
 
-        # Reject generic titles
         if is_generic_title(title):
             i += 1
             continue
 
-        #  Strict tech filtering
         if not is_tech_internship(title, description):
             i += 1
             continue
 
-        # Remove duplicates
         clean_title = normalize_title(title)
+
         if clean_title in seen_titles:
             i += 1
             continue
@@ -213,22 +189,18 @@ def fetch_from_api(search_query=None):
         internships.append({
             "title": title,
             "description": description,
-            "location": job.get("location", {}).get("display_name", "N/A"),
+            "location": internship.get("location", {}).get("display_name", "N/A"),
             "duration": "Not specified",
             "target_candidates": "Open to students",
-            "domain": "Technology"
+            "domain": "Tech"
         })
 
         i += 1
 
-    # Cache only if results exist
     if len(internships) > 0:
         with open(CACHE_FILE, "w", encoding="utf-8") as f:
             json.dump(internships, f, indent=4)
-        print("Cached", len(internships), "clean tech internships.")
-    else:
-        print("No valid internships after filtering.")
 
-    print("---- Adzuna Fetch Ended ----")
+    print("---- Adzuna Internship Fetch Ended ----")
 
     return internships

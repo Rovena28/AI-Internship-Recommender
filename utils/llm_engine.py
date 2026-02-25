@@ -23,6 +23,9 @@ def clean_markdown(text):
 
 def generate_explanations(resume_text, top_internships):
 
+    if not top_internships:
+        return []
+
     internship_text = ""
 
     i = 0
@@ -72,14 +75,15 @@ Return ONLY valid JSON:
             contents=prompt
         )
 
+        if not response.text:
+            return []
+
         text_output = response.text.strip()
 
-        start = text_output.find("[")
-        end = text_output.rfind("]")
+        match = re.search(r"\[.*\]", text_output, re.DOTALL)
 
-        if start != -1 and end != -1:
-            clean_json = text_output[start:end+1]
-            return json.loads(clean_json)
+        if match:
+            return json.loads(match.group())
 
         return []
 
@@ -114,6 +118,9 @@ Rules:
             model="gemini-2.5-flash",
             contents=prompt
         )
+
+        if not response.text:
+            return "Unable to generate suggestions at this time."
 
         clean_text = clean_markdown(response.text)
 

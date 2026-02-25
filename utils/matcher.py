@@ -1,5 +1,6 @@
 import json
 import os
+import numpy as np
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from utils.resume_parser import extract_skills
@@ -7,11 +8,11 @@ from utils.api_fetcher import fetch_from_api
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 def load_internships():
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    file_path = os.path.join(base_dir, "internships.json")
-
+    file_path = os.path.join(BASE_DIR, "internships.json")
     with open(file_path, "r", encoding="utf-8") as file:
         return json.load(file)
 
@@ -36,15 +37,7 @@ def normalize_title(title):
 
 def match_internships(resume_text, top_n=5):
 
-    resume_skills = extract_skills(resume_text)
-
-    if len(resume_skills) > 0:
-        search_query = resume_skills[0] + " internship"
-    else:
-        search_query = "internship"
-
-    internships = fetch_from_api(search_query)
-
+    internships = fetch_from_api()
     data_source = "live"
 
     if not internships:
@@ -54,6 +47,7 @@ def match_internships(resume_text, top_n=5):
     if len(internships) == 0:
         return [], "none"
 
+    #  Prepare descriptions for embedding
     descriptions = []
 
     i = 0
@@ -63,6 +57,7 @@ def match_internships(resume_text, top_n=5):
         descriptions.append(combined_text)
         i += 1
 
+    #  Generate embeddings
     resume_embedding = model.encode([resume_text.strip()])
     internship_embeddings = model.encode(descriptions)
 
@@ -96,13 +91,16 @@ def match_internships(resume_text, top_n=5):
 
         j += 1
 
+    #  Sort by final score
     results.sort(key=lambda x: x["score"], reverse=True)
 
+    #  Remove duplicate titles
     unique_results = []
     seen_titles = set()
 
     k = 0
     while k < len(results):
+
         base_title = normalize_title(results[k]["title"])
 
         if base_title not in seen_titles:
