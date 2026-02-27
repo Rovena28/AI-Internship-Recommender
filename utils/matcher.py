@@ -47,7 +47,6 @@ def match_internships(resume_text, top_n=5):
     if len(internships) == 0:
         return [], "none"
 
-    #  Prepare descriptions for embedding
     descriptions = []
 
     i = 0
@@ -57,7 +56,6 @@ def match_internships(resume_text, top_n=5):
         descriptions.append(combined_text)
         i += 1
 
-    #  Generate embeddings
     resume_embedding = model.encode([resume_text.strip()])
     internship_embeddings = model.encode(descriptions)
 
@@ -78,7 +76,8 @@ def match_internships(resume_text, top_n=5):
             internships[j]["description"]
         )
 
-        final_score = (0.6 * semantic_score) + (0.4 * skill_score)
+        # Hybrid scoring (semantic weighted higher)
+        final_score = (0.7 * semantic_score) + (0.3 * skill_score)
 
         results.append({
             "title": internships[j]["title"],
@@ -91,10 +90,8 @@ def match_internships(resume_text, top_n=5):
 
         j += 1
 
-    #  Sort by final score
     results.sort(key=lambda x: x["score"], reverse=True)
 
-    #  Remove duplicate titles
     unique_results = []
     seen_titles = set()
 
